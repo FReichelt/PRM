@@ -81,7 +81,7 @@ export const Authenticated = (options: AuthOptions = {}) => {
     return applyDecorators(...decorators);
 };
 
-export const Auth = createParamDecorator((data, context: ExecutionContext): AuthDto => {
+export const        Auth = createParamDecorator((data, context: ExecutionContext): AuthDto => {
     return context.switchToHttp().getRequest<{ user: AuthDto }>().user;
 });
 
