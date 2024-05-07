@@ -61,6 +61,7 @@ jobs:
             :white_check_mark: **Automated linting/formatting passed.**
             All issues have been successfully fixed.
           reactions: hooray
+          edit-mode: replace
 
       - name: Create new branch and PR if linting was successful
         if: steps.verify-changed-files.outputs.files_changed == 'true'
