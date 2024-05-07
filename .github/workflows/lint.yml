@@ -110,7 +110,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "${{ github.event.pull_request.head.ref }}"
-          source_branch: "$BRANCH_NAME"
+          source_branch: "linting/${{ github.event.pull_request.head.ref }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Automated linting PR for PR #$PARENT_PR_NUMBER"
           pr_body: Automated linting PR for PR \#$PARENT_PR_NUMBER" --body "This PR is automatically generated to apply linting fixes for PR \#$PARENT_PR_NUMBER. \#$BRANCH_NAME should only be used by automated actions!!!"
