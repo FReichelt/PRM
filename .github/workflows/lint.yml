@@ -68,7 +68,8 @@ jobs:
         run: |
           SHORT_COMMIT=$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)
           PARENT_PR_NUMBER=$(echo ${{ github.event.pull_request.head.ref }} | sed 's/.*\///')
-          BRANCH_NAME="linting/${{ github.event.pull_request.base.ref }}"
+          BASE_BRANCH_NAME=${{ github.event.pull_request.base.ref }}
+          BRANCH_NAME="linting/$BASE_BRANCH_NAME"
           git config --global user.email "mail@florian-reichelt.de"
           git config --global user.name "Flo's linting bot"          
           git checkout -b $BRANCH_NAME
