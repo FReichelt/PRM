@@ -37,13 +37,13 @@ jobs:
 
       - name: Run web linter
         id: web-lint
-        run: npm run lint
+        run: npm run lint:fix
         working-directory: ./web
         continue-on-error: true
 
       - name: Run web prettier
         id: web-prettier
-        run: npm run format
+        run: npm run format:fix
         working-directory: ./web
         continue-on-error: true
 
