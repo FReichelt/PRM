@@ -3,7 +3,7 @@ name: Automated enforcing of linting
 on: pull_request
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
