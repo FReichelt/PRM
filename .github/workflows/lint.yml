@@ -91,7 +91,7 @@ jobs:
           reactions: hooray
           edit-mode: replace
 
-      - name: Create new branch and PR if linting was successful
+      - name: Create new branch if linting was successful
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           SHORT_COMMIT=$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)
@@ -104,6 +104,13 @@ jobs:
           git add .
           git commit -m "Automated linting for pr #$PARENT_PR_NUMBER"
           git push origin $BRANCH_NAME -f
-          gh pr create --base $BASE_BRANCH_NAME --head $BRANCH_NAME --title "Automated linting PR for PR #$PARENT_PR_NUMBER" --body "This PR is automatically generated to apply linting fixes for PR #$PARENT_PR_NUMBER. #$BRANCH_NAME should only be used by automated actions!!!" 2>/dev/null
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "${{ github.event.pull_request.head.ref }}"
+          source_branch: "$BRANCH_NAME"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Automated linting PR for PR #$PARENT_PR_NUMBER"
+          pr_body: Automated linting PR for PR \#$PARENT_PR_NUMBER" --body "This PR is automatically generated to apply linting fixes for PR \#$PARENT_PR_NUMBER. \#$BRANCH_NAME should only be used by automated actions!!!"
