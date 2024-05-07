@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: "20"
 
+        #Server linting
       - name: Install server NPM dependencies
         run: npm install
         working-directory: ./server
@@ -28,12 +29,12 @@ jobs:
         id: server-prettier
         run: npm run format
         working-directory: ./server
-        continue-on-error:
-          true
+        continue-on-error: true
 
-          # Web Linting
+        # Web Linting
       - name: Install web NPM dependencies
-        run: cd web && npm install
+        run: npm install
+        working-directory: ./web
 
       - name: Run web linter
         id: web-lint
