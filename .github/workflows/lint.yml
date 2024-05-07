@@ -52,7 +52,6 @@ jobs:
           body: |
             :warning: **Automated linting/formatting failed.**
             Some issues couldn't be fixed automatically and require manual attention.
-          reactions: rocket
       - name: Update comment
         if: steps.lint.outcome == 'success' && steps.prettier.outcome == 'success' && steps.fc.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v1
